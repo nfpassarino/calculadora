@@ -5,10 +5,13 @@ let borrar = true;
 const $resultado = document.querySelector('#resultado');
 
 document.querySelectorAll('.btn__nro').forEach(btn__nro => btn__nro.addEventListener('click', mostrar));
-document.querySelectorAll('.btn__accion-op').forEach(btn__op => btn__op.addEventListener('click', accionar));
 document.querySelectorAll('.btn__accion-limpiar').forEach(btn__limpiar => btn__limpiar.addEventListener('click', limpiar));
 
 function mostrar() {
+	document.querySelectorAll('.btn__accion-op').forEach(btn__op => {
+		btn__op.addEventListener('click', accionar);
+		btn__op.classList.remove('selected');
+	});
 	let num = this.value;
 	let res = $resultado.value;
 	if (borrar === true && num !== '.') {
@@ -21,7 +24,11 @@ function mostrar() {
 }
 
 function accionar() {
+	document.querySelectorAll('.btn__accion-op').forEach(btn__op => btn__op.removeEventListener('click', accionar));
 	let boton = this.value;
+	if (boton !== '=') {
+		this.classList.add('selected');
+	}
 	if(n1 === null && borrar === false && boton !== '=') {
 		n1 = parseFloat($resultado.value);
 		op = boton;
@@ -32,6 +39,7 @@ function accionar() {
 		$resultado.value = n1;
 		n2 = null;
 		if (boton === '=') {
+			document.querySelectorAll('.btn__accion-op').forEach(btn__op => btn__op.addEventListener('click', accionar));
 			op = '';
 			borrar = false;
 		} else {
@@ -61,6 +69,10 @@ function resolver() {
 }
 
 function limpiar() {
+	document.querySelectorAll('.btn__accion-op').forEach(btn__op => {
+		btn__op.removeEventListener('click', accionar);
+		btn__op.classList.remove('selected');
+	});
 	let boton = this.value;
 	switch (boton) {
 		case 'C':

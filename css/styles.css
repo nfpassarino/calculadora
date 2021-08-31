@@ -54,15 +54,14 @@ body {
 	font-family: inherit;
 	font-size: 1.2rem;
 	cursor: pointer;
-	opacity: .8;
 }
 
 .btn__nro {
 	font-weight: bold;
 }
 
-.btn__nro:hover, .btn__accion:hover {
-	opacity: .9;
+.btn__nro:hover, .btn__accion-limpiar:hover, .btn__accion-op:hover, .selected {
+	background-color: #bbbbbb;
 }
 
 #btn__igual {
@@ -70,4 +69,8 @@ body {
 	background-color: #f77f00;
 	font-weight: bold;
 	color: #ffffff;
+}
+
+#btn__igual:hover {
+	background-color: #ce6a00;
 }
