@@ -2,27 +2,34 @@ let n1 = null;
 let n2 = null;
 let op = '';
 let borrar = true;
+const $resultado = document.querySelector('#resultado');
 
-function mostrar(num) {
-	let res = document.getElementById('resultado').value;
+document.querySelectorAll('.btn__nro').forEach(btn__nro => btn__nro.addEventListener('click', mostrar));
+document.querySelectorAll('.btn__accion-op').forEach(btn__op => btn__op.addEventListener('click', accionar));
+document.querySelectorAll('.btn__accion-limpiar').forEach(btn__limpiar => btn__limpiar.addEventListener('click', limpiar));
+
+function mostrar() {
+	let num = this.value;
+	let res = $resultado.value;
 	if (borrar === true && num !== '.') {
-		document.getElementById('resultado').value = num;
+		$resultado.value = num;
 		borrar = false;
 	} else if (borrar === false && !(num === '.' && res.includes('.'))) {
 		res += num;
-		document.getElementById('resultado').value = res;
+		$resultado.value = res;
 	}
 }
 
-function accionar(boton) {
+function accionar() {
+	let boton = this.value;
 	if(n1 === null && borrar === false && boton !== '=') {
-		n1 = parseFloat(document.getElementById('resultado').value);
+		n1 = parseFloat($resultado.value);
 		op = boton;
 		borrar = true;
 	} else if (n1 !== null && borrar === false) {
-		n2 = parseFloat(document.getElementById('resultado').value);
+		n2 = parseFloat($resultado.value);
 		resolver();
-		document.getElementById('resultado').value = n1;
+		$resultado.value = n1;
 		n2 = null;
 		if (boton === '=') {
 			op = '';
@@ -53,26 +60,27 @@ function resolver() {
 	}
 }
 
-function limpiar(boton) {
+function limpiar() {
+	let boton = this.value;
 	switch (boton) {
 		case 'C':
 			n1 = null;
 			n2 = null;
 			op = '';
 			borrar = true;
-			document.getElementById('resultado').value = '0';
+			$resultado.value = '0';
 			break
 		case 'CE':
-			document.getElementById('resultado').value = '0';
+			$resultado.value = '0';
 			borrar = true;
 			break
 		case '<-':
-			let parcial = document.getElementById('resultado').value;
+			let parcial = $resultado.value;
 			parcial = parcial.slice(0,-1);
 			if (parcial.length !== 0) {
-				document.getElementById('resultado').value = parcial;
+				$resultado.value = parcial;
 			} else {
-				document.getElementById('resultado').value = '0';
+				$resultado.value = '0';
 				borrar = true;
 			}
 	}
