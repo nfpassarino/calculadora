@@ -1,27 +1,27 @@
 let n1 = null;
 let n2 = null;
-let op = "";
+let op = '';
 let borrar = true;
-const $resultado = document.querySelector("#resultado");
+const $resultado = document.querySelector('#resultado');
 
 document
-    .querySelectorAll(".btn__nro")
-    .forEach((btn__nro) => btn__nro.addEventListener("click", mostrar));
+    .querySelectorAll('.btn__nro')
+    .forEach((btn__nro) => btn__nro.addEventListener('click', mostrar));
 document
-    .querySelectorAll(".btn__accion-limpiar")
-    .forEach((btn__limpiar) => btn__limpiar.addEventListener("click", limpiar));
+    .querySelectorAll('.btn__accion-limpiar')
+    .forEach((btn__limpiar) => btn__limpiar.addEventListener('click', limpiar));
 
 function mostrar() {
-    document.querySelectorAll(".btn__accion-op").forEach((btn__op) => {
-        btn__op.addEventListener("click", accionar);
-        btn__op.classList.remove("selected");
+    document.querySelectorAll('.btn__accion-op').forEach((btn__op) => {
+        btn__op.addEventListener('click', accionar);
+        btn__op.classList.remove('selected');
     });
     let num = this.value;
     let res = $resultado.value;
-    if (borrar === true && num !== ".") {
+    if (borrar === true && num !== '.') {
         $resultado.value = num;
         borrar = false;
-    } else if (borrar === false && !(num === "." && res.includes("."))) {
+    } else if (borrar === false && !(num === '.' && res.includes('.'))) {
         res += num;
         $resultado.value = res;
     }
@@ -29,13 +29,13 @@ function mostrar() {
 
 function accionar() {
     document
-        .querySelectorAll(".btn__accion-op")
-        .forEach((btn__op) => btn__op.removeEventListener("click", accionar));
+        .querySelectorAll('.btn__accion-op')
+        .forEach((btn__op) => btn__op.removeEventListener('click', accionar));
     let boton = this.value;
-    if (boton !== "=") {
-        this.classList.add("selected");
+    if (boton !== '=') {
+        this.classList.add('selected');
     }
-    if (n1 === null && borrar === false && boton !== "=") {
+    if (n1 === null && borrar === false && boton !== '=') {
         n1 = parseFloat($resultado.value);
         op = boton;
         borrar = true;
@@ -44,13 +44,13 @@ function accionar() {
         resolver();
         $resultado.value = n1;
         n2 = null;
-        if (boton === "=") {
+        if (boton === '=') {
             document
-                .querySelectorAll(".btn__accion-op")
+                .querySelectorAll('.btn__accion-op')
                 .forEach((btn__op) =>
-                    btn__op.addEventListener("click", accionar)
+                    btn__op.addEventListener('click', accionar)
                 );
-            op = "";
+            op = '';
             borrar = false;
         } else {
             op = boton;
@@ -61,16 +61,16 @@ function accionar() {
 
 function resolver() {
     switch (op) {
-        case "+":
+        case '+':
             n1 += n2;
             break;
-        case "-":
+        case '-':
             n1 -= n2;
             break;
-        case "X":
+        case 'X':
             n1 *= n2;
             break;
-        case "/":
+        case '/':
             n1 /= n2;
             break;
         default:
@@ -79,30 +79,30 @@ function resolver() {
 }
 
 function limpiar() {
-    document.querySelectorAll(".btn__accion-op").forEach((btn__op) => {
-        btn__op.removeEventListener("click", accionar);
-        btn__op.classList.remove("selected");
+    document.querySelectorAll('.btn__accion-op').forEach((btn__op) => {
+        btn__op.removeEventListener('click', accionar);
+        btn__op.classList.remove('selected');
     });
     let boton = this.value;
     switch (boton) {
-        case "C":
+        case 'C':
             n1 = null;
             n2 = null;
-            op = "";
+            op = '';
             borrar = true;
-            $resultado.value = "0";
+            $resultado.value = '0';
             break;
-        case "CE":
-            $resultado.value = "0";
+        case 'CE':
+            $resultado.value = '0';
             borrar = true;
             break;
-        case "<-":
+        case '<-':
             let parcial = $resultado.value;
             parcial = parcial.slice(0, -1);
             if (parcial.length !== 0) {
                 $resultado.value = parcial;
             } else {
-                $resultado.value = "0";
+                $resultado.value = '0';
                 borrar = true;
             }
     }
